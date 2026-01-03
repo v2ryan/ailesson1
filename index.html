@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,20 +17,49 @@
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
         }
+
         .card-hover {
             transition: all 0.3s ease;
         }
+
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
+
         .glass-header {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(229, 231, 235, 0.5);
         }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 17px;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
     </style>
 </head>
+
 <body class="text-gray-800 antialiased min-h-screen flex flex-col">
 
     <!-- Header Section -->
@@ -46,14 +76,15 @@
             </div>
             <div class="text-right hidden sm:block">
                 <div class="text-sm text-gray-500">課程日期</div>
-                <div class="text-lg font-bold text-gray-900"><i class="fa-regular fa-calendar-days mr-2"></i>2026/01/03</div>
+                <div class="text-lg font-bold text-gray-900"><i class="fa-regular fa-calendar-days mr-2"></i>2026/01/03
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
-        
+
         <!-- Welcome Message -->
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">歡迎 大家</h2>
@@ -68,7 +99,7 @@
                 <i class="fa-brands fa-google text-indigo-500 mr-2"></i> Google AI 核心工具
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
+
                 <!-- Gemini App -->
                 <a href="https://gemini.google.com/app" target="_blank" class="block group">
                     <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover h-full flex flex-col">
@@ -76,12 +107,15 @@
                             <div class="p-3 bg-blue-100 rounded-lg text-blue-600">
                                 <i class="fa-solid fa-sparkles text-2xl"></i>
                             </div>
-                            <span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">必備</span>
+                            <span
+                                class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">必備</span>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">Google Gemini</h4>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                            Google Gemini</h4>
                         <p class="text-sm text-gray-500 flex-grow">您主要用於生成內容、編寫程式碼及分析的 AI 助手。</p>
                         <div class="mt-4 text-indigo-600 text-sm font-medium flex items-center">
-                            啟動應用程式 <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            啟動應用程式 <i
+                                class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                         </div>
                     </div>
                 </a>
@@ -94,10 +128,12 @@
                                 <i class="fa-solid fa-code text-2xl"></i>
                             </div>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">Google AI Studio</h4>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                            Google AI Studio</h4>
                         <p class="text-sm text-gray-500 flex-grow">開發者使用 Gemini 模型進行構建的原型設計環境。</p>
                         <div class="mt-4 text-indigo-600 text-sm font-medium flex items-center">
-                            開啟 Studio <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            開啟 Studio <i
+                                class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                         </div>
                     </div>
                 </a>
@@ -110,10 +146,12 @@
                                 <i class="fa-regular fa-gem text-2xl"></i>
                             </div>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">Gemini Gems</h4>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                            Gemini Gems</h4>
                         <p class="text-sm text-gray-500 flex-grow">針對特定任務量身打造的自訂版 Gemini。</p>
                         <div class="mt-4 text-indigo-600 text-sm font-medium flex items-center">
-                            查看 Gems <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            查看 Gems <i
+                                class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                         </div>
                     </div>
                 </a>
@@ -126,27 +164,34 @@
                                 <i class="fa-solid fa-book-open text-2xl"></i>
                             </div>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">NotebookLM</h4>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                            NotebookLM</h4>
                         <p class="text-sm text-gray-500 flex-grow">基於您的文件內容，由 AI 驅動的研習筆記本。</p>
                         <div class="mt-4 text-indigo-600 text-sm font-medium flex items-center">
-                            開啟筆記本 <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            開啟筆記本 <i
+                                class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                         </div>
                     </div>
                 </a>
 
-                <!-- NotebookLM (Specific) -->
-                <a href="https://notebooklm.google.com/notebook/bf6f4d98-44c9-4daf-98e4-4637025f7b1c" target="_blank" class="block group">
-                    <div class="bg-white rounded-xl p-6 border-l-4 border-l-indigo-500 shadow-md card-hover h-full flex flex-col relative overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-indigo-500 text-white text-xs px-2 py-1 rounded-bl-lg">課程教材</div>
+                <!-- NotebookLM (Specific) - Updated Link -->
+                <a href="https://notebooklm.google.com/notebook/13145622-02ce-4b3c-b572-264a876d4c8f" target="_blank"
+                    class="block group">
+                    <div
+                        class="bg-white rounded-xl p-6 border-l-4 border-l-indigo-500 shadow-md card-hover h-full flex flex-col relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-indigo-500 text-white text-xs px-2 py-1 rounded-bl-lg">
+                            課程教材</div>
                         <div class="flex items-center justify-between mb-4">
                             <div class="p-3 bg-indigo-100 rounded-lg text-indigo-600">
                                 <i class="fa-solid fa-graduation-cap text-2xl"></i>
                             </div>
                         </div>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">課程專用筆記本</h4>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                            課程專用筆記本</h4>
                         <p class="text-sm text-gray-500 flex-grow">直接連結至我們特定的課程教材與資料來源。</p>
                         <div class="mt-4 text-indigo-600 text-sm font-medium flex items-center">
-                            存取教材 <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            存取教材 <i
+                                class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                         </div>
                     </div>
                 </a>
@@ -161,7 +206,8 @@
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <a href="https://github.com/" target="_blank" class="block group md:col-span-1">
-                    <div class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover h-full flex flex-col text-white">
+                    <div
+                        class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover h-full flex flex-col text-white">
                         <div class="flex items-center justify-between mb-4">
                             <div class="p-3 bg-gray-700 rounded-lg text-white">
                                 <i class="fa-brands fa-github text-2xl"></i>
@@ -170,7 +216,8 @@
                         <h4 class="text-lg font-bold mb-2 text-white">GitHub</h4>
                         <p class="text-sm text-gray-400 flex-grow">全球領先的軟件開發平台。</p>
                         <div class="mt-4 text-white text-sm font-medium flex items-center">
-                            前往 GitHub <i class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            前往 GitHub <i
+                                class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                         </div>
                     </div>
                 </a>
@@ -183,74 +230,300 @@
                 <i class="fa-solid fa-layer-group text-teal-500 mr-2"></i> 專案示範與應用程式
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                
                 <!-- Split Chat App -->
                 <a href="https://v2ryan.github.io/split-chat-app/" target="_blank" class="block group">
                     <div class="bg-white rounded-lg p-5 border border-gray-200 card-hover text-center h-full">
-                        <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-full mx-auto flex items-center justify-center mb-3">
+                        <div
+                            class="w-12 h-12 bg-teal-100 text-teal-600 rounded-full mx-auto flex items-center justify-center mb-3">
                             <i class="fa-solid fa-comments"></i>
                         </div>
                         <h5 class="font-bold text-gray-900 mb-1">Split Chat App</h5>
                         <p class="text-xs text-gray-500">雙介面聊天室</p>
                     </div>
                 </a>
-
                 <!-- Gem Dictation -->
                 <a href="https://v2ryan.github.io/gemdictation/" target="_blank" class="block group">
                     <div class="bg-white rounded-lg p-5 border border-gray-200 card-hover text-center h-full">
-                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full mx-auto flex items-center justify-center mb-3">
+                        <div
+                            class="w-12 h-12 bg-red-100 text-red-600 rounded-full mx-auto flex items-center justify-center mb-3">
                             <i class="fa-solid fa-microphone-lines"></i>
                         </div>
                         <h5 class="font-bold text-gray-900 mb-1">Gem Dictation</h5>
                         <p class="text-xs text-gray-500">語音轉文字工具</p>
                     </div>
                 </a>
-
-                <!-- Cal (Updated to Calculator) -->
+                <!-- Cal (Calculator) -->
                 <a href="https://v2ryan.github.io/cal" target="_blank" class="block group">
                     <div class="bg-white rounded-lg p-5 border border-gray-200 card-hover text-center h-full">
-                        <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full mx-auto flex items-center justify-center mb-3">
+                        <div
+                            class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full mx-auto flex items-center justify-center mb-3">
                             <i class="fa-solid fa-calculator"></i>
                         </div>
                         <h5 class="font-bold text-gray-900 mb-1">計數機</h5>
                         <p class="text-xs text-gray-500">網頁版計算工具</p>
                     </div>
                 </a>
-
                 <!-- Weather -->
                 <a href="https://v2ryan.github.io/WEATHER/" target="_blank" class="block group">
                     <div class="bg-white rounded-lg p-5 border border-gray-200 card-hover text-center h-full">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full mx-auto flex items-center justify-center mb-3">
+                        <div
+                            class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full mx-auto flex items-center justify-center mb-3">
                             <i class="fa-solid fa-cloud-sun"></i>
                         </div>
                         <h5 class="font-bold text-gray-900 mb-1">Weather</h5>
                         <p class="text-xs text-gray-500">天氣預報介面</p>
                     </div>
                 </a>
-
                 <!-- Sound -->
                 <a href="https://v2ryan.github.io/sound/" target="_blank" class="block group">
                     <div class="bg-white rounded-lg p-5 border border-gray-200 card-hover text-center h-full">
-                        <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full mx-auto flex items-center justify-center mb-3">
+                        <div
+                            class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full mx-auto flex items-center justify-center mb-3">
                             <i class="fa-solid fa-volume-high"></i>
                         </div>
                         <h5 class="font-bold text-gray-900 mb-1">Sound Board</h5>
                         <p class="text-xs text-gray-500">音效互動板</p>
                     </div>
                 </a>
-
                 <!-- Video Rec -->
                 <a href="https://v2ryan.github.io/videorec/" target="_blank" class="block group">
                     <div class="bg-white rounded-lg p-5 border border-gray-200 card-hover text-center h-full">
-                        <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-full mx-auto flex items-center justify-center mb-3">
+                        <div
+                            class="w-12 h-12 bg-pink-100 text-pink-600 rounded-full mx-auto flex items-center justify-center mb-3">
                             <i class="fa-solid fa-video"></i>
                         </div>
                         <h5 class="font-bold text-gray-900 mb-1">Video Recorder</h5>
                         <p class="text-xs text-gray-500">錄影工具</p>
                     </div>
                 </a>
-
             </div>
+        </div>
+
+        <!-- Section 4: Prompt Library (New) -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center border-b pb-2 border-gray-200">
+                <i class="fa-solid fa-terminal text-orange-500 mr-2"></i> 課堂提示詞庫 (Prompt Library)
+            </h3>
+
+            <!-- Category: Web Apps -->
+            <div class="mb-8">
+                <h4 class="text-lg font-bold text-indigo-700 mb-4 bg-indigo-50 inline-block px-3 py-1 rounded-md">
+                    1. Googele Studio AI Prompt
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Prompt 1 -->
+                    <div class="bg-white p-5 rounded-lg border border-indigo-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">「茶記」記帳 App</h5>
+                            <i class="fa-solid fa-money-bill-1-wave text-indigo-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">適合測試 AI 對香港本地文化理解與 localStorage 應用。</p>
+                        <button onclick="copyPrompt('prompt-finance')"
+                            class="w-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Prompt 2 -->
+                    <div class="bg-white p-5 rounded-lg border border-indigo-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">專注力番茄鐘</h5>
+                            <i class="fa-regular fa-clock text-indigo-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">練習 Alert 邏輯與計時器功能，強調結構性。</p>
+                        <button onclick="copyPrompt('prompt-pomodoro')"
+                            class="w-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Prompt 3 -->
+                    <div class="bg-white p-5 rounded-lg border border-indigo-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">「今晚食乜好」隨機決定器</h5>
+                            <i class="fa-solid fa-utensils text-indigo-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">加入動畫效果與 Cyberpunk 風格的進階練習。</p>
+                        <button onclick="copyPrompt('prompt-food')"
+                            class="w-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Prompt 4 -->
+                    <div class="bg-white p-5 rounded-lg border border-indigo-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">喝水打卡紀錄</h5>
+                            <i class="fa-solid fa-droplet text-indigo-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">練習進度條 (Progress Bar) 視覺化與重置功能。</p>
+                        <button onclick="copyPrompt('prompt-water')"
+                            class="w-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Prompt 5 -->
+                    <div class="bg-white p-5 rounded-lg border border-indigo-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">簡易匯率換算 (HKD/JPY)</h5>
+                            <i class="fa-solid fa-yen-sign text-indigo-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">測試即時計算邏輯與雙向綁定。</p>
+                        <button onclick="copyPrompt('prompt-currency')"
+                            class="w-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Gem Utilities -->
+            <div class="mb-8">
+                <h4 class="text-lg font-bold text-purple-700 mb-4 bg-purple-50 inline-block px-3 py-1 rounded-md">
+                    2. Gem 學習助手 (Utilities)
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Gem 1 -->
+                    <div class="bg-white p-5 rounded-lg border border-purple-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">Assignment 拆解大師</h5>
+                            <i class="fa-solid fa-list-check text-purple-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">將複雜功課拆解為 Markdown Checkbox 清單。</p>
+                        <button onclick="copyPrompt('gem-planner')"
+                            class="w-full bg-purple-50 text-purple-600 hover:bg-purple-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Gem 2 -->
+                    <div class="bg-white p-5 rounded-lg border border-purple-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">溫書筆記轉換器</h5>
+                            <i class="fa-solid fa-brain text-purple-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">產生可匯入 Anki/Quizlet 的 CSV 格式問答卡。</p>
+                        <button onclick="copyPrompt('gem-flashcard')"
+                            class="w-full bg-purple-50 text-purple-600 hover:bg-purple-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Gem 3 -->
+                    <div class="bg-white p-5 rounded-lg border border-purple-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">DSE 英文作文批改員</h5>
+                            <i class="fa-solid fa-pen-nib text-purple-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">指出語法錯誤並提供高級詞彙建議。</p>
+                        <button onclick="copyPrompt('gem-writing')"
+                            class="w-full bg-purple-50 text-purple-600 hover:bg-purple-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Gem 4 -->
+                    <div class="bg-white p-5 rounded-lg border border-purple-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">虛擬面試官 (廣東話版)</h5>
+                            <i class="fa-solid fa-user-tie text-purple-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">進行一對一追問式模擬面試。</p>
+                        <button onclick="copyPrompt('gem-interview')"
+                            class="w-full bg-purple-50 text-purple-600 hover:bg-purple-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Gem 5 -->
+                    <div class="bg-white p-5 rounded-lg border border-purple-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">Python 除錯導師</h5>
+                            <i class="fa-brands fa-python text-purple-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">蘇格拉底式教學，引導學生自己找 Bug。</p>
+                        <button onclick="copyPrompt('gem-debug')"
+                            class="w-full bg-purple-50 text-purple-600 hover:bg-purple-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Canvas Games -->
+            <div class="mb-8">
+                <h4 class="text-lg font-bold text-pink-700 mb-4 bg-pink-50 inline-block px-3 py-1 rounded-md">
+                    3. Canvas / Antigravity Prompt
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Game 1 -->
+                    <div class="bg-white p-5 rounded-lg border border-pink-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">DSE 狀元大冒險</h5>
+                            <i class="fa-solid fa-gamepad text-pink-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">文字冒險 RPG，練習邏輯判斷與數值系統。</p>
+                        <button onclick="copyPrompt('game-rpg')"
+                            class="w-full bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Game 2 -->
+                    <div class="bg-white p-5 rounded-lg border border-pink-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">魚蛋跌落嚟 (Physics)</h5>
+                            <i class="fa-solid fa-shapes text-pink-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">物理碰撞遊戲，練習 HTML5 Canvas API。</p>
+                        <button onclick="copyPrompt('game-physics')"
+                            class="w-full bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Game 3 -->
+                    <div class="bg-white p-5 rounded-lg border border-pink-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">班房座位抽籤機</h5>
+                            <i class="fa-solid fa-ticket text-pink-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">視覺特效練習，包含撒花 (Confetti) 效果。</p>
+                        <button onclick="copyPrompt('game-random')"
+                            class="w-full bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Game 4 -->
+                    <div class="bg-white p-5 rounded-lg border border-pink-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">Cyberpunk 香港時鐘</h5>
+                            <i class="fa-solid fa-clock text-pink-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">視覺藝術編程，獲取時間與動態背景。</p>
+                        <button onclick="copyPrompt('game-clock')"
+                            class="w-full bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+
+                    <!-- Game 5 -->
+                    <div class="bg-white p-5 rounded-lg border border-pink-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-3">
+                            <h5 class="font-bold text-gray-900">自訂 Flashcard 翻牌器</h5>
+                            <i class="fa-solid fa-layer-group text-pink-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-4">基礎 CRUD 應用與 CSS 3D 翻轉動畫。</p>
+                        <button onclick="copyPrompt('game-flashcard')"
+                            class="w-full bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white font-semibold py-2 px-4 rounded transition flex items-center justify-center">
+                            <i class="fa-regular fa-copy mr-2"></i> 複製提示詞
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </main>
@@ -261,5 +534,114 @@
         </div>
     </footer>
 
+    <!-- Toast UI -->
+    <div id="toast">已複製到剪貼簿！</div>
+
+    <!-- Hidden Prompts Storage -->
+    <div style="display:none;">
+        <!-- Web Apps -->
+        <textarea
+            id="prompt-finance">角色 (Persona)：你是一位熟悉香港生活文化的資深前端工程師。 背景 (Context)：我想要一個簡單的記帳 App，用來記錄日常在香港的餐飲消費。 任務 (Aim)：請編寫一個單一檔案的 HTML App（包含 CSS 和 JS）。 限制 (Effective)： 1. 介面語言：使用香港繁體中文（廣東話），例如「今日洗咗幾多？」、「食咗咩？」。 2. 功能：輸入金額、選擇類別（如：早餐、午餐、下午茶、搭車）、儲存按鈕。 3. 資料儲存：使用 localStorage，刷新頁面後紀錄不會消失。 4. 設計：使用大按鈕，方便手機單手操作，風格要簡潔明亮。 格式 (Structure)：請給我完整的 HTML 程式碼，我可以直接存檔並用瀏覽器打開。</textarea>
+
+        <textarea
+            id="prompt-pomodoro">角色 (Persona)：UI/UX 設計師兼程式設計師。 任務 (Aim)：開發一個「專注力番茄鐘」網頁應用程式。 背景 (Context)：使用者需要透過 25 分鐘工作、5 分鐘休息來提升效率。 限制 (Effective)： 1. 邏輯：倒數計時器，預設 25:00，時間到會彈出瀏覽器提示 (Alert) 叫人「休息吓啦！」。 2. 視覺：工作時背景是柔和的紅色，休息時變成綠色。 3. 語言：繁體中文（香港）。 4. 技術：將 HTML, CSS, JavaScript 全部寫在同一個檔案中。 格式 (Structure)：輸出一段完整的程式碼，不要分段。</textarea>
+
+        <textarea
+            id="prompt-food">角色 (Persona)：創意網頁開發者 (Creative Developer)。 情境 (Context)：香港人經常有「選擇困難症」，不知道晚餐吃什麼。 任務 (Aim)：製作一個隨機抽籤 App。 限制 (Effective)： 1. 預設選項：內建一些香港常見選擇（如：譚仔、壽司郎、麥當勞、兩餸飯、茶餐廳）。同時允許使用者自己新增選項。 2. 互動：按下「幫我揀」按鈕時，要有一個快速跳動的動畫效果，最後停在一個選項上。 3. 介面：使用 Cyberpunk 風格或霓虹燈風格。 格式 (Structure)：提供單一 HTML 檔案，包含所有樣式和邏輯。</textarea>
+
+        <textarea
+            id="prompt-water">角色 (Persona)：健康應用程式架構師。 任務 (Aim)：建立一個每日喝水追蹤器 (Water Tracker)。 背景 (Context)：使用者目標是每天喝 2000ml 水。 限制 (Effective)： 1. 功能：有幾個預設按鈕（如：一杯水 250ml、一支水 500ml），按一下就會增加進度。 2. 視覺化：需要一個進度條 (Progress Bar)，顯示目前喝了多少百分比。 3. 重置：每天過了午夜 12 點，或者提供一個「新一日」按鈕來歸零。 4. 語言：繁體中文 (HK)。 格式 (Structure)：完整的 HTML/CSS/JS 整合代碼。</textarea>
+
+        <textarea
+            id="prompt-currency">角色 (Persona)：全端工程師。 情境 (Context)：香港人去日本旅行，需要快速換算價格。 任務 (Aim)：製作一個港幣 (HKD) 對日圓 (JPY) 的即時換算器。 限制 (Effective)： 1. 輸入方式：兩個輸入框，輸入日圓自動算出港幣，輸入港幣自動算出日圓。 2. 匯率設定：因為匯率會變，請在頁面上方提供一個輸入框讓使用者可以「手動修改匯率」（預設值設為 0.052）。 3. 設計風格：極簡主義，數字字體要大，方便在街上購物時看。 格式 (Structure)：提供單一 HTML 檔案。</textarea>
+
+        <!-- Gems -->
+        <textarea
+            id="gem-planner">角色 (Persona)：你是一位經驗豐富的學術專案經理，擅長將複雜的作業指引拆解為可執行的微型任務。 背景 (Context)：使用者是香港學生，面對一份長篇大論的 Assignment Brief 感到迷惘。 任務 (Aim)： 1. 分析使用者上傳的作業要求或貼上的文字。 2. 將作業拆解為 3 個階段：「資料搜集」、「撰寫草稿」、「最終修潤」。 3. 為每個階段列出具體的 Checklists。 限制 (Effective)： · 語氣：鼓勵性、專業但親切（可以使用少量廣東話，如「加油」、「搞掂」）。 · 格式：必須輸出為 Markdown Checkbox 格式（-[ ]），方便複製到 Notion 或 Google Keep。 · 若作業有提到 Deadline，請根據日期倒推建議的時間表。 🎓學生如何使用： · 輸入： 直接貼上老師派發的 Assignment PDF 內容或網址。 · 自動化產出： 一個帶有打勾框的詳細行動計畫表。</textarea>
+
+        <textarea
+            id="gem-flashcard">角色 (Persona)：你是一位認知心理學專家，精通「間隔重複記憶法」(Spaced Repetition)。 任務 (Aim)：將使用者提供的長篇文章或筆記，轉化為高品質的「問題 - 答案」對 (Q&A Pairs)。 結構 (Structure)： 1. 請輸出為 CSV 格式（用逗號分隔），格式為：問題,答案。 2. 請將輸出放在一個 Code Block 中，方便一鍵複製。 限制 (Effective)： · 問題設計：問題要簡短有力，測試核心概念而非枝節末節。 · 語言：繁體中文（香港）。對於專有名詞，請保留英文原名在括號中，例如：光合作用 (Photosynthesis)。 · 忽略無意義的連接詞或廢話，只提取考點。 🎓學生如何使用： · 輸入： 貼上一段關於「光合作用」的課文。 · 自動化產出： 一段 CSV 代碼，學生複製存檔後即可匯入 Anki 背單字/概念。</textarea>
+
+        <textarea
+            id="gem-writing">角色 (Persona)：你是一位嚴格但公正的香港 DSE 英文科閱卷員。 背景 (Context)：學生希望提升寫作卷 (Writing Paper) 的分數，特別是 Grammar 和 Vocabulary。 任務 (Aim)： 1. 指出文章中的語法錯誤 (Grammar Mistakes)，並解釋原因。 2. 建議 3-5 個可以替換的高級詞彙 (Advanced Vocabulary)來升級文章用字（例如將 "good" 改為 "exceptional"）。 3. 根據 DSE 評分標準給予簡短評語。 限制 (Effective)： · 嚴禁：不要直接重寫整篇文章，必須讓學生自己動手改。 · 格式：使用列點形式 (Bullet points) 展示錯誤與建議。 · 語氣：專業指導，解釋要用中文（廣東話輔助說明），但英文例句要道地。 🎓學生如何使用： · 輸入： 貼上自己寫的英文作文草稿。 · 自動化產出： 一份詳細的「改卷報告」，指出哪裡用了 Chinglish，並教你如何寫得更 native。</textarea>
+
+        <textarea
+            id="gem-interview">角色 (Persona)：你是一位挑剔的大學入學面試官或公司 HR。 任務 (Aim)：與使用者進行一對一的模擬面試 (Mock Interview)。 互動模式 (Structure)： 1. 不要一次問所有問題。請像真實聊天一樣，一次只問一個問題，等待使用者回答後，再根據回答進行追問 (Follow-up question)。 2. 在對話結束後（當使用者說「結束」時），才給出整體表現的評分和改善建議。 限制 (Effective)： · 語言：預設使用廣東話（口語）進行面試。只有當使用者明確要求「用英文面試」時，才切換為英文。 · 追問邏輯：如果回答太簡短，請追問具體例子（STAR 法則）。 · 風格：保持專業但具備壓力測試的氛圍，會針對邏輯漏洞進行反問。</textarea>
+
+        <textarea
+            id="gem-debug">角色 (Persona)：你是一位資深的軟體工程師導師，信奉「蘇格拉底式教學法」。 背景 (Context)：初學編程的學生遇到了 Error，但直接給代碼會害了他們。 任務 (Aim)： 1. 分析使用者的程式碼錯誤。 2. 不要直接修復代碼。 3. 提供 3 個引導性問題 (Guiding Questions) 或提示 (Hints)，讓使用者自己意識到邏輯漏洞在哪。 限制 (Effective)： · 語言：繁體中文（香港）。 · 適用範圍：Python, HTML, JavaScript, C++。 · 如果學生嘗試了 3 次仍失敗，才提供最終的修復代碼並詳細解釋。 🎓學生如何使用： · 輸入： 貼上一段跑不動的 Python code。 · 自動化產出： 「這段 code 在第 5 行有個邏輯問題。你留意一下 for loop 的範圍，是不是少跑了一次？」</textarea>
+
+        <!-- Games -->
+        <textarea
+            id="game-rpg">角色 (Persona)：創意遊戲編劇兼前端工程師。 任務 (Aim)：開發一個名為「DSE 狀元大冒險」的文字冒險遊戲 (Text Adventure Game)。 背景 (Context)：主角是一名香港中學生，目標是在 DSE 考取 5**，但途中會遇到各種誘惑（如：打機、唱K、恰眼瞓）。 限制 (Effective)： 1. 架構：單一 index.html 檔案，包含所有樣式和腳本。 2. 玩法：畫面上會顯示當前情境（例如：「現在是晚上11點，你要溫書還是開黑？」），下面有 2-3 個選項按鈕。 3. 數值：要有「壓力值」和「學業值」。壓力爆錶或學業歸零都會 Game Over。 4. 風格：復古像素風 (Pixel Art Style) 的 UI，深色背景，綠色文字。 格式 (Structure)：請給我完整的完整代碼，並在代碼中用註釋標示哪裡可以修改「題目」和「結局」，方便我教學。</textarea>
+
+        <textarea
+            id="game-physics">角色 (Persona)：物理引擎專家與遊戲開發者。 任務 (Aim)：製作一個類似「西瓜遊戲 (Suika Game)」的簡化版，主題是「香港街頭小食」。 背景 (Context)：學生需要學習物體碰撞和重力邏輯。 限制 (Effective)： 1. 玩法：點擊螢幕上方，掉落不同的食物（魚蛋、燒賣、雞蛋仔）。相同的食物碰到會合併變大（例如：兩粒魚蛋變一粒燒賣）。 2. 技術：使用 HTML5 Canvas API 編寫，邏輯要寫在同一個檔案內。 3. 圖形：因為沒有圖片檔，請用 Emoji (🍡, 🥟, 🧇) 代替貼圖，直接畫在 Canvas 上。 4. 適配：必須支援手機觸控 (Mobile Touch) 和電腦滑鼠。 格式 (Structure)：單一 index.html 檔案，代碼需包含詳細註釋解釋「碰撞檢測」的邏輯。</textarea>
+
+        <textarea
+            id="game-random">角色 (Persona)：互動網頁設計師。 任務 (Aim)：設計一個視覺效果豐富的「隨機抽籤器」。 情境 (Context)：老師或班長需要公平地從名單中抽出一位同學。 限制 (Effective)： 1. 功能：一個大大的文字輸入框讓使用者貼上名單（一行一個名），以及一個巨大的「抽！」按鈕。 2. 特效：按下按鈕後，名字要在螢幕上像「老虎機」一樣快速滾動，最後配上撒花特效 (Confetti) 停在得獎者名字上。 3. UI 風格：現代簡約風 (Clean Aesthetic)，使用 Apple 風格的圓角和陰影。 4. 部署：確保所有代碼（含 Confetti 的簡易 JS 實現）都在一個檔案中。 格式 (Structure)：完整可執行的 HTML 代碼。</textarea>
+
+        <textarea
+            id="game-clock">角色 (Persona)：前衛的新媒體藝術家。 任務 (Aim)：編寫一個動態的數碼時鐘網頁，作為電腦螢幕保護程式。 限制 (Effective)： 1. 視覺主題：Cyberpunk (電馭叛客) 風格，霓虹粉紅和青色為主調，背景全黑。 2. 功能：顯示目前的 HH:MM:SS，秒數要有動態條 (Progress Bar) 跑動。 3. 背景：背景要有像《Matrix》那樣的隨機代碼或漢字（如：港、九、新、界）下雨效果。 4. 字型：使用 Monospace 等寬字體，看起來像駭客介面。 格式 (Structure)：單一 index.html 檔案。</textarea>
+
+        <textarea
+            id="game-flashcard">角色 (Persona)：教育科技 (EdTech) 開發者。 任務 (Aim)：製作一個簡單的單字記憶卡 (Flashcard) App。 情境 (Context)：學生想用手機背英文單字或化學公式。 限制 (Effective)： 1. 互動：畫面顯示一張卡片，點擊卡片會像「翻轉」一樣顯示背面的答案（使用 CSS 3D Transform）。 2. 功能：提供「下一張」按鈕，以及一個「新增卡片」的輸入介面。 3. 儲存：使用 localStorage，這樣學生關掉瀏覽器再打開，卡片紀錄還在。 4. 預設資料：內建 5 組關於「HTML 標籤」的預設卡片作為範例。 格式 (Structure)：單一 index.html 檔案，請確保 CSS 翻轉動畫流暢。</textarea>
+    </div>
+
+    <script>
+        function copyPrompt(id) {
+            // Get the text from the hidden textarea
+            var text = document.getElementById(id).value;
+
+            // Create a temporary textarea element
+            var tempInput = document.createElement("textarea");
+            tempInput.value = text;
+
+            // Ensure it's not visible but part of the DOM
+            // display:none prevents selection, so we use absolute position off-screen
+            tempInput.style.position = "fixed";
+            tempInput.style.left = "-9999px";
+            tempInput.style.top = "0";
+
+            document.body.appendChild(tempInput);
+
+            // Select and Copy
+            tempInput.focus();
+            tempInput.select();
+
+            try {
+                // Try using the modern API first if available in this context
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(function () {
+                        showToast();
+                    }, function () {
+                        // Fallback
+                        document.execCommand('copy');
+                        showToast();
+                    });
+                } else {
+                    // Fallback for older browsers or restricted iframe contexts
+                    var successful = document.execCommand('copy');
+                    if (successful) {
+                        showToast();
+                    } else {
+                        console.error('Copy command failed.');
+                    }
+                }
+            } catch (err) {
+                console.error('Unable to copy', err);
+            }
+
+            // Clean up
+            document.body.removeChild(tempInput);
+        }
+
+        function showToast() {
+            var x = document.getElementById("toast");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
 </body>
+
 </html>
