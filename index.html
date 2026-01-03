@@ -57,6 +57,34 @@
             opacity: 1;
             bottom: 50px;
         }
+
+        /* Prompt Preview Tooltip */
+        #prompt-preview {
+            display: none;
+            position: fixed;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(4px);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 9999;
+            width: 320px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: #374151;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+
+        #prompt-preview.show {
+            display: block;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -589,6 +617,81 @@
     </div>
 
     <script>
+        // Init Tooltip
+        document.addEventListener('DOMContentLoaded', function () {
+            createTooltipElement();
+            attachTooltipListeners();
+        });
+
+        function createTooltipElement() {
+            if (!document.getElementById('prompt-preview')) {
+                const tooltip = document.createElement('div');
+                tooltip.id = 'prompt-preview';
+                document.body.appendChild(tooltip);
+            }
+        }
+
+        function attachTooltipListeners() {
+            const buttons = document.querySelectorAll('button[onclick^="copyPrompt"]');
+            const tooltip = document.getElementById('prompt-preview');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function (e) {
+                    const onclickText = this.getAttribute('onclick');
+                    const match = onclickText.match(/'([^']+)'/);
+                    if (match && match[1]) {
+                        const promptId = match[1];
+                        const promptText = document.getElementById(promptId).value;
+
+                        tooltip.textContent = promptText;
+                        tooltip.classList.add('show');
+                        updateTooltipPosition(e, tooltip);
+                    }
+                });
+
+                btn.addEventListener('mousemove', function (e) {
+                    updateTooltipPosition(e, tooltip);
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    tooltip.classList.remove('show');
+                    // Small delay to allow transition to finish before hiding display if needed
+                    setTimeout(() => {
+                        if (!tooltip.classList.contains('show')) {
+                            tooltip.style.display = 'none';
+                        }
+                    }, 200);
+                });
+            });
+        }
+
+        function updateTooltipPosition(e, tooltip) {
+            const gap = 15;
+            let left = e.clientX + gap;
+            let top = e.clientY + gap;
+
+            // Boundary checks
+            const rect = tooltip.getBoundingClientRect();
+
+            // Check right edge
+            if (left + rect.width > window.innerWidth) {
+                left = e.clientX - rect.width - gap;
+            }
+
+            // Check bottom edge
+            if (top + rect.height > window.innerHeight) {
+                top = e.clientY - rect.height - gap;
+            }
+
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+
+            // Ensure display is block when updating position (in case of race conditions)
+            if (tooltip.classList.contains('show')) {
+                tooltip.style.display = 'block';
+            }
+        }
+
         function copyPrompt(id) {
             // Get the text from the hidden textarea
             var text = document.getElementById(id).value;
